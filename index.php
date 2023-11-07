@@ -1,51 +1,4 @@
-<!-- Create a program that asks user for hrs and minutes, then adds them together and gives the total in minutes -->
-
-<!-- It should be in hrs and minutes -->
 <?php // Model - part for data handling - handling POST and GET
-
-// Calculations will be done at the top
-
-
-
-// Create an error saying "number has to be between 0 and 59" if they input a number that is higher than 59 for the minutes
-
-// The program should display the total hrs and minutes
-
-// If the added time goes over 60 min convert it into hrs
-  // Create a program that converts minutes into hrs
-// if (! isset($_POST['dopost'])) {
-//   echo "You didn't enter a value";
-// } else {
-//   echo "Thanks for entering a number"."<br/>";
-//   // When they input number, calculate
-   
-//    // Print the total of hrs
-//    $hrsTotal = intval($_POST['hr1']) + intval($_POST['hr2']);
-   
-//    echo"<p>"."Total HRS: $hrsTotal"."hrs"."</p>";
-//    // 4. Then convert the hrs into minutes 
-//   // hrTotal = ((hr1*60) + (hr2 * 60)) 
-
-//   //3. If there is user input add the minutes together
-//   // minTotal = (min1 + min2)
-//     // Need to know how to get the value of min1 + min2 (its input given by the user)
-
-//    $minTotal =  intval($_POST['min1']) + intval($_POST['min2']);
-//    echo "<p>"."Total Minutes: $minTotal"."min"."</p>";
-
-//   $hrsInMin = (intval($_POST['hr1'])*60) + (intval($_POST['hr2'])*60); 
-//   // echo "Hours in minutes: $hrsInMin";
-
-// // 5. Then add the min and hrs total tgt
-// $total = $hrsInMin + $minTotal;
-// echo "<p>"."Total in minutes: $total min"."</p>";
-
-// // totalInMin = (hrTotal + minTotal), and display it to the user
-// // 
-// }
-?>
-
-<?php
 if (isset($_POST['dopost'])) {
   $hr1 = intval($_POST['hr1']);
   $hr2 = intval($_POST['hr2']);
@@ -55,33 +8,33 @@ if (isset($_POST['dopost'])) {
     echo '<p style="color: red;">Enter a number for each box</p>';
   }
   else {
-  // When they input number, calculate
-   
    // Print the total of hrs
-  $hrsTotal = intval($_POST['hr1']) + intval($_POST['hr2']);
-   
-  echo"<p>"."Total of the hours: $hrsTotal"." hrs"."</p>";
-   // 4. Then convert the hrs into minutes 
-  // hrTotal = ((hr1*60) + (hr2 * 60)) 
-
-  //3. If there is user input add the minutes together
-  // minTotal = (min1 + min2)
-    // Need to know how to get the value of min1 + min2 (its input given by the user)
-
-  $minTotal =  intval($_POST['min1']) + intval($_POST['min2']);
-  echo "<p>"."Total of the minutes: $minTotal"." min"."</p>";
-
-  $hrsInMin = (intval($_POST['hr1'])*60) + (intval($_POST['hr2'])*60); 
-  // echo "Hours in minutes: $hrsInMin";
-
-// 5. Then add the min and hrs total tgt
+  $hrsTotal = $hr1 + $hr2;
+  $minTotal =  $min1 + $min2;
+  $hrsInMin = ($hr1*60) + ($hr2*60); 
 $total = $hrsInMin + $minTotal;
 echo "<p>"."Total of all hours and the minutes (shown in minutes): $total min"."</p>";
+
+function checkHrsMins ($total) {
+  if (($total % 60) != 0) {
+    $rem = $total % 60; 
+    // echo "The remainder is: $rem"; 
+    // This gives the remaining minutes
+  
+    $divHr= intval($total / 60);
+    // if divHr > 1 {
+    // }
+}
+
+checkHrsMins ($total);
+}
+
+$divHr= intval($total / 60); 
+
+echo "$hr1 hrs + $hr2 hrs + $min1 min + $min2 min = $total minutes"."<br>";
+echo '<p>'."It is equal to $divHr hrs $minTotal minutes".'</p>';
 } 
 }
-// else {
-//     echo "Please enter a value";
-// }
 ?>
 
 <html>
@@ -112,6 +65,3 @@ echo "<p>"."Total of all hours and the minutes (shown in minutes): $total min"."
     </form>
   </body>
 </html>
-
-
-
