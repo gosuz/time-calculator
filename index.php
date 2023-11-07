@@ -1,40 +1,79 @@
 <?php // Model - part for data handling - handling POST and GET
-if (isset($_POST['dopost'])) {
-  $hr1 = intval($_POST['hr1']);
-  $hr2 = intval($_POST['hr2']);
-  $min1 = intval($_POST['min1']);
-  $min2 = intval($_POST['min2']);
-  if ( empty($hr1) || empty($hr2) || empty($min1) || empty($min2)) {
-    echo '<p style="color: red;">Enter a number for each box</p>';
-  }
-  else {
-   // Print the total of hrs
-  $hrsTotal = $hr1 + $hr2;
-  $minTotal =  $min1 + $min2;
-  $hrsInMin = ($hr1*60) + ($hr2*60); 
-$total = $hrsInMin + $minTotal;
-echo "<p>"."Total of all hours and the minutes (shown in minutes): $total min"."</p>";
-
-function checkHrsMins ($total) {
-  if (($total % 60) != 0) {
-    $rem = $total % 60; 
+function convertToMin ($sum) {
+  if (($sum % 60) != 0) {
+    $rem = $sum % 60; 
     // echo "The remainder is: $rem"; 
     // This gives the remaining minutes
   
-    $divHr= intval($total / 60);
+    $divHr= intval($sum / 60);
     // if divHr > 1 {
     // }
+    return "Total is: $divHr hrs $rem minutes";
+}
+ else{
+  //If its somethign like 240 min you want it to show as:
+    // 6hrs
+    $divHr = $sum / 60;
+    return "Total is: $divHr hrs";
+ }
 }
 
-checkHrsMins ($total);
+// Have to make it accept the input of 0
+// But not accept empty
+
+// I want user input
+// I want to allow 0
+
+// Is empty and 0 the same in php??
+
+// If user doesn't input anything its goign to be treated as null in
+
+if (isset($_POST['dopost'])) {
+  // if (( empty($hr1) || empty($hr2) || empty($min1) || empty($min2))  ){
+  //   echo '<p style="color: red;">Enter a number for each box</p>';
+  // }
+
+// How do you actually get around
+    $hr1 = $_POST['hr1'];
+    $hr2 = $_POST['hr2'];
+    // var_dump($hr2);
+    $min1 = $_POST['min1'];
+    // var_dump(($min1));
+    $min2 = $_POST['min2'];
+
+if (( empty($hr1) || empty($hr2) || empty($min1) || empty($min2)) && ($hr1 !== "0") && ($hr2 !== "0") && ($min1 !== "0") && ($min2 !== "0")){
+  echo '<p style="color: red;">Enter a number for each box</p>';
+  // var_dump(empty($hr1)); // bool = True
+  // var_dump(empty($hr2)); // bool = True
 }
 
-$divHr= intval($total / 60); 
+  else {
+    $intHr1 = intval($_POST['hr1']);
+    $intHr2 = intval($_POST['hr2']);
+    $intMin1 = intval($_POST['min1']);
+    $intMin2 = intval($_POST['min2']);
+   // Print the total of hrs
+    $hrsTotal = $intHr1 + $intHr2;
+    $minTotal =  $intMin1 + $intMin2;
+    $hrsInMin = ($intHr1*60) + ($intHr2*60); 
+    $total = $hrsInMin + $minTotal; //Total hrs and the minutes all in minutes
+    echo "<p>"."Total of all hours and the minutes (shown in minutes): $total min"."</p>";
 
-echo "$hr1 hrs + $hr2 hrs + $min1 min + $min2 min = $total minutes"."<br>";
-echo '<p>'."It is equal to $divHr hrs $minTotal minutes".'</p>';
-} 
+    // Convert the hours into minutes
+    $result = convertToMin ($total);
+    echo $result;
 }
+}
+  
+
+
+
+
+// $divHr= intval($total / 60); 
+
+// echo "$hr1 hrs + $hr2 hrs + $min1 min + $min2 min = $total minutes"."<br>";
+// echo '<p>'."It is equal to $divHr hrs $minTotal minutes".'</p>';
+
 ?>
 
 <html>
